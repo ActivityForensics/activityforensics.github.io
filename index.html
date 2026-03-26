@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ActivityForensics | 数字活动取证工具</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    body { font-family: system-ui, -apple-system, sans-serif; }
+    .hero-bg { background: linear-gradient(135deg, #1e3a8a, #312e81); }
+    video { border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+  </style>
+</head>
+<body class="bg-gray-950 text-white">
+
+  <!-- Hero -->
+  <div class="hero-bg py-20 text-center">
+    <h1 class="text-6xl font-bold mb-4">ActivityForensics</h1>
+    <p class="text-2xl text-gray-300 max-w-3xl mx-auto">专业的数字活动取证与行为分析开源工具</p>
+    <div class="mt-10 flex justify-center gap-6 flex-wrap">
+      <a href="https://github.com/ActivityForensics/ActivityForensics" 
+         class="bg-white text-black px-8 py-4 rounded-2xl font-semibold flex items-center gap-3 hover:bg-gray-200">
+        <i class="fab fa-github text-2xl"></i> GitHub 代码仓库
+      </a>
+      <a href="#paper" class="border border-white px-8 py-4 rounded-2xl font-semibold hover:bg-white hover:text-black">
+        阅读论文
+      </a>
+    </div>
+  </div>
+
+  <!-- 论文主图 -->
+  <div id="paper" class="max-w-6xl mx-auto px-6 py-16">
+    <h2 class="text-4xl font-bold text-center mb-10">论文主图 (Teaser Figure)</h2>
+    <div class="bg-gray-900 rounded-3xl p-8 text-center">
+      <!-- 请替换成你的论文主图实际链接 -->
+      <img src="https://raw.githubusercontent.com/ActivityForensics/ActivityForensics/main/images/teaser.jpg" 
+           alt="ActivityForensics Paper Main Figure" 
+           class="mx-auto rounded-2xl shadow-2xl max-w-full">
+    </div>
+  </div>
+
+  <!-- 论文与代码链接 -->
+  <div class="max-w-6xl mx-auto px-6 py-12 grid md:grid-cols-2 gap-10">
+    <div>
+      <h3 class="text-3xl font-semibold mb-6">📄 论文链接</h3>
+      <a href="https://你的论文链接" target="_blank"
+         class="block bg-gray-900 hover:bg-gray-800 p-8 rounded-3xl text-xl transition">
+        阅读完整论文
+      </a>
+    </div>
+    <div>
+      <h3 class="text-3xl font-semibold mb-6">💻 代码链接</h3>
+      <a href="https://github.com/ActivityForensics/ActivityForensics" target="_blank"
+         class="block bg-gray-900 hover:bg-gray-800 p-8 rounded-3xl text-xl transition">
+        查看开源代码仓库
+      </a>
+    </div>
+  </div>
+
+  <!-- 视频样例 - 直接播放 -->
+  <div class="max-w-6xl mx-auto px-6 py-16 bg-gray-900">
+    <h2 class="text-4xl font-bold text-center mb-12">视频演示 Samples</h2>
+    
+    <div class="grid md:grid-cols-2 gap-12">
+      <!-- 视频1 -->
+      <div>
+        <h3 class="text-xl font-medium mb-4 text-center">演示视频 1：核心功能展示</h3>
+        <video width="100%" controls autoplay loop muted playsinline>
+          <source src="https://raw.githubusercontent.com/ActivityForensics/ActivityForensics/main/videos/demo1.mp4" type="video/mp4">
+          您的浏览器不支持视频播放。
+        </video>
+      </div>
+
+      <!-- 视频2 -->
+      <div>
+        <h3 class="text-xl font-medium mb-4 text-center">演示视频 2：实际案例分析</h3>
+        <video width="100%" controls autoplay loop muted playsinline>
+          <source src="https://raw.githubusercontent.com/ActivityForensics/ActivityForensics/main/videos/demo2.mp4" type="video/mp4">
+          您的浏览器不支持视频播放。
+        </video>
+      </div>
+    </div>
+    
+    <p class="text-center text-gray-400 mt-8">视频文件请上传到仓库的 <code>videos/</code> 文件夹</p>
+  </div>
+
+  <!-- 作者信息 -->
+  <div class="max-w-6xl mx-auto px-6 py-16">
+    <h2 class="text-4xl font-bold text-center mb-10">作者 Authors</h2>
+    <div class="bg-gray-900 rounded-3xl p-10 text-center text-lg leading-relaxed">
+      Peijun Bao<sup>1,2</sup>, Anwei Luo<sup>3,4</sup>, Gang Pan<sup>1</sup>, Alex C. Kot<sup>5,6,2</sup>, Xudong Jiang<sup>2</sup><br><br>
+      <sup>1</sup>College of Computer Science and Technology, Zhejiang University<br>
+      <sup>2</sup>School of Electrical and Electronic Engineering, Nanyang Technological University<br>
+      <sup>3</sup>School of Computing and Artificial Intelligence, Jiangxi University of Finance and Economics<br>
+      <sup>4</sup>Jiangxi Provincial Key Laboratory of Multimedia Intelligent Processing<br>
+      <sup>5</sup>Faculty of Engineering, Shenzhen MSU-BIT University<br>
+      <sup>6</sup>VinUniversity<br><br>
+      <span class="font-mono text-blue-400">peijun001@e.ntu.edu.sg</span>
+    </div>
+  </div>
+
+  <!-- BibTeX -->
+  <div class="max-w-6xl mx-auto px-6 py-16 bg-gray-900">
+    <h2 class="text-4xl font-bold text-center mb-8">BibTeX Citation</h2>
+    <pre class="bg-gray-950 p-8 rounded-3xl overflow-auto text-sm text-gray-300"><code>@article{bao202X_activityforensics,
+  title     = {ActivityForensics: ...},
+  author    = {Peijun Bao and Anwei Luo and Gang Pan and Alex C. Kot and Xudong Jiang},
+  year      = {202X},
+  journal   = {...}
+}</code></pre>
+  </div>
+
+  <!-- 访问者统计（推荐使用 MapMyVisitors 或 Clustrmaps，更美观） -->
+  <div class="max-w-6xl mx-auto px-6 py-16 text-center">
+    <h2 class="text-3xl font-bold mb-8">访问统计 Visitor Statistics</h2>
+    <div class="bg-gray-900 inline-block px-12 py-8 rounded-3xl">
+      <p class="mb-6">全球访问者地图</p>
+      <!-- 推荐替换成 MapMyVisitors 或 Clustrmaps 的代码（更漂亮的互动地图） -->
+      <p class="text-gray-400">（建议注册 <a href="https://mapmyvisitors.com/" target="_blank" class="text-blue-400">MapMyVisitors</a> 获取免费互动世界地图）</p>
+    </div>
+  </div>
+
+  <footer class="text-center py-12 text-gray-500 border-t border-gray-800">
+    © 2026 ActivityForensics • 开源项目
+  </footer>
+
+</body>
+</html>
