@@ -161,46 +161,46 @@
                     playsinline
                     poster="./fig/02_samples/0UK3H_fast.jpg"
             >
-                <source src="./fig/02_samples/0UK3H+2.10=8.20=charades@test_delete@0UK3H@639@wan.mp4" type="video/mp4">
+                <source src="./fig/02_samples/0UK3H+2.10=8.20=charades@test_delete@0UK3H@639@wan_crop.mp4" type="video/mp4">
             </video>
         </div>
 
-<div style="width: 180px; flex: 0 0 180px;">
-    <button
-        id="btn"
-        onclick="showImg()"
-        style="
+        <div style="width: 180px; flex: 0 0 180px;">
+            <button
+                    id="btn"
+                    onclick="showImg()"
+                    style="
             width:100%;
             background-color: #b0c4de;
             border: none;
             padding: 8px;
             cursor: pointer;
         "
-    >
-        Clik to Show Answer
-    </button>
+            >
+                Clik to Show Answer
+            </button>
 
-    <img
-        id="answerImg"
-        src="./fig/02_samples/main.png"
-        style="width: 100%; object-fit: cover; display: none; margin-top: 8px;"
-    />
-</div>
+            <img
+                    id="answerImg"
+                    src="./fig/02_samples/main.png"
+                    style="width: 100%; object-fit: cover; display: none; margin-top: 8px;"
+            />
+        </div>
 
-<script>
-function showImg() {
-    const img = document.getElementById("answerImg");
-    const btn = document.getElementById("btn");
+        <script>
+            function showImg() {
+                const img = document.getElementById("answerImg");
+                const btn = document.getElementById("btn");
 
-    img.style.display = "block";
-    btn.style.display = "none";
+                img.style.display = "block";
+                btn.style.display = "none";
 
-    setTimeout(() => {
-        img.style.display = "none";
-        btn.style.display = "block";
-    }, 1500); // 10秒
-}
-</script>
+                setTimeout(() => {
+                    img.style.display = "none";
+                    btn.style.display = "block";
+                }, 1500); // 10秒
+            }
+        </script>
 
 
         <div style="width: 250px; flex: 0 0 250px;">
@@ -213,7 +213,7 @@ function showImg() {
                     playsinline
                     poster="./fig/02_samples/0UK3H_fast.jpg"
             >
-                <source src="./fig/02_samples/0UK3H.mp4" type="video/mp4">
+                <source src="./fig/02_samples/0UK3H_crop.mp4" type="video/mp4">
             </video>
         </div>
     </div>
@@ -444,20 +444,22 @@ function showImg() {
         }, 300);
     </script>
 
-<p style="margin-top: -30px; margin-bottom: -10px; text-align: center;">
-    Please refresh the page if the videos cannot be played.
-</p>
+    <p style="margin-top: -30px; margin-bottom: -10px; text-align: center;">
+        Please refresh the page if the videos cannot be played.
+    </p>
 
     <!-- 数据集构建流程 (Fig 2) -->
     <h3 class="section-title" style="text-align: center;">
         Grounding-Assisted Dataset Construction
     </h3>
-    <div class="figure-box">
-        <img src="fig/03_generation/main.png" style="width: 80%; height: auto; alt="Data Construction Pipeline">
-        <p class="caption">
-            <strong>Overview of grounding-assisted data generation pipeline.</strong>  1) We leverage video captioning and temporal grounding to obtain activity descriptions and localize their corresponding temporal segments. 2) Subsequently, grounded segments and manipulated descriptions are harnessed as conditioning signals to automatically perform activity manipulations. 3) The manipulated segments are finally seamlessly merged into the rest of the video, while remaining visually consistent across both tampered and authentic regions. The green bounding boxes indicate the original regions, while the red ones correspond to the manipulated regions.
-        </p>
-    </div>
+<div class="figure-box" style="text-align: center;">
+    <img src="fig/03_generation/main.png"
+         style="width: 80%; height: auto;"
+         alt="Data Construction Pipeline">
+    <p class="caption" style="text-align: center; margin: 10px auto;">
+        Overview of grounding-assisted dataset generation pipeline.
+    </p>
+</div>
 
 
     <!-- BibTeX -->
