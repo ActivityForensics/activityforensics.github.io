@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ActivityForensics: A Comprehensive Benchmark</title>
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Google Sans', sans-serif; margin: 0; padding: 0; color: #3c4043; line-height: 1.6; background: #fff; }
+        .container { max-width: 1050px; margin: 0 auto; padding: 60px 20px; }
+
+        /* Title Section */
+        header { text-align: center; margin-bottom: 50px; }
+        h1 { font-size: 2.4rem; color: #202124; margin-bottom: 12px; line-height: 1.2; }
+        h2 { font-size: 1.6rem; font-weight: 400; color: #5f6368; margin-top: 0; margin-bottom: 30px; }
+
+        .authors { font-size: 1.25rem; font-weight: 500; margin-bottom: 10px; color: #202124; }
+        .authors span { margin: 0 10px; }
+
+        /* Links Buttons */
+        .links { display: flex; justify-content: center; gap: 15px; margin: 35px 0; }
+        .links a {
+            text-decoration: none;
+            color: #fff;
+            background: #202124;
+            padding: 10px 25px;
+            border-radius: 30px;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        .links a:hover { background: #4a4a4a; transform: translateY(-2px); }
+
+        /* Figure Boxes */
+        .section-title { font-size: 1.8rem; margin: 60px 0 30px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
+        .figure-box { text-align: center; margin: 40px 0; }
+        .figure-box img { width: 100%; height: auto; border-radius: 4px; }
+        .caption { font-size: 0.95rem; color: #5f6368; margin-top: 15px; text-align: justify; line-height: 1.5; }
+
+        /* Interactive Video Comparison */
+        .video-comparison {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #f1f3f4;
+            padding: 40px 20px;
+            border-radius: 20px;
+            margin: 40px 0;
+        }
+        .video-item { width: 44%; text-align: center; }
+        .video-item video {
+            width: 100%;
+            border-radius: 12px;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            background: #000;
+        }
+        .video-label { font-weight: 700; margin-top: 15px; display: block; font-size: 1.1rem; }
+
+        .arrow-container { width: 10%; text-align: center; display: flex; flex-direction: column; align-items: center; }
+        .arrow-svg { width: 40px; height: 40px; fill: #bdc1c6; }
+        .timestamp-tag {
+            background: #ff3b30;
+            color: #fff;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-top: 10px;
+            white-space: nowrap;
+        }
+
+        /* BibTeX */
+        .bibtex-box { background: #f8f9fa; padding: 25px; border-radius: 12px; position: relative; }
+        pre { margin: 0; font-family: 'Courier New', Courier, monospace; font-size: 0.9rem; overflow-x: auto; white-space: pre-wrap; }
+
+        /* Footer & Map */
+        footer { margin-top: 80px; padding: 40px 0; border-top: 1px solid #eee; text-align: center; }
+        .map-widget { margin-top: 30px; filter: grayscale(0.5); }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- 标题与作者 -->
+    <header style="text-align: center; margin-bottom: 30px; line-height: 1.2;">
+        <h1 style="margin: 0 0 5px 0; font-size: 2rem; font-weight: 700; line-height: 1.2; text-align: center;">
+            ActivityForensics: A Comprehensive Benchmark <br>
+            for Localizing Manipulated Activity in Videos
+        </h1>
+        <h4 style="margin: 0 0 10px 0; color: #1a73e8; font-size: 1.1rem; letter-spacing: 0.5px;">The IEEE/CVF Conference on Computer Vision and Pattern Recognition 2026 (CVPR 2026)</h4>
+
+        <div class="authors" style="font-size: 1rem; font-weight: 500; margin: 0 0 2px 0;">
+            Peijun Bao<sup>1,2</sup>, &nbsp; Anwei Luo<sup>3</sup>, &nbsp; Gang Pan<sup>1</sup>, &nbsp; Alex C. Kot<sup>2</sup>, &nbsp; Xudong Jiang<sup>2</sup>
+        </div>
+
+        <div class="affiliations" style="font-size: 0.8rem; color: #5f6368; margin: 0;">
+            <sup>1</sup>Zhejiang University &nbsp;&nbsp; <sup>2</sup>Nanyang Technological University &nbsp;&nbsp; <sup>3</sup>Jiangxi University of Finance and Economics
+        </div>
+
+    </header>
+
+        </figure>
+
+
+
+    <h3 class="section-title" style="text-align: center;">
+        Example: In which video are the activities AI-manipulated?
+    </h3>
+
+
+
+    <div
+            class="row-container"
+            style="
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 700px;
+        margin: 40px auto;
+    "
+    >
+        <div style="width: 250px; flex: 0 0 250px;">
+            <video
+                    id="video-left"
+                    style="width: 100%; object-fit: cover;"
+                    controls
+                    muted
+                    preload="auto"
+                    playsinline
+                    poster="./fig/02_samples/0UK3H_fast.jpg"
+            >
+                <source src="./fig/02_samples/0UK3H+2.10=8.20=charades@test_delete@0UK3H@639@wan_crop.mp4" type="video/mp4">
+            </video>
+        </div>
+
+        <div style="width: 180px; flex: 0 0 180px;">
+            <button
+                    id="btn"
+                    onclick="showImg()"
+                    style="
+            width:100%;
+            background-color: #b0c4de;
+            border: none;
+            padding: 8px;
+            cursor: pointer;
+        "
+            >
+                Clik to Show Answer
+            </button>
+
+            <img
+                    id="answerImg"
+                    src="./fig/02_samples/main.png"
+                    style="width: 100%; object-fit: cover; display: none; margin-top: 8px;"
+            />
+        </div>
+
+        <script>
+            function showImg() {
+                const img = document.getElementById("answerImg");
+                const btn = document.getElementById("btn");
+
+                img.style.display = "block";
+                btn.style.display = "none";
+
+                setTimeout(() => {
+                    img.style.display = "none";
+                    btn.style.display = "block";
+                }, 1500); // 10秒
+            }
+        </script>
+
+
+        <div style="width: 250px; flex: 0 0 250px;">
+            <video
+                    id="video-right"
+                    style="width: 100%; object-fit: cover;"
+                    controls
+                    muted
+                    preload="auto"
+                    playsinline
+                    poster="./fig/02_samples/0UK3H_fast.jpg"
+            >
+                <source src="./fig/02_samples/0UK3H_crop.mp4" type="video/mp4">
+            </video>
+        </div>
+    </div>
+
+    <script>
+        const leftVideo = document.getElementById("video-left");
+        const rightVideo = document.getElementById("video-right");
+
+        let syncing = false;
+
+        function syncTime(source, target, threshold = 0.08) {
+            const diff = Math.abs(source.currentTime - target.currentTime);
+            if (diff > threshold) {
+                target.currentTime = source.currentTime;
+            }
+        }
+
+        async function handlePlay(source, target) {
+            if (syncing) return;
+            syncing = true;
+
+            try {
+                syncTime(source, target, 0);
+
+                if (target.paused) {
+                    await target.play().catch(() => {});
+                }
+            } finally {
+                syncing = false;
+            }
+        }
+
+        function handlePause(source, target) {
+            if (syncing) return;
+            syncing = true;
+
+            try {
+                syncTime(source, target, 0);
+                if (!target.paused) {
+                    target.pause();
+                }
+            } finally {
+                syncing = false;
+            }
+        }
+
+        function handleSeek(source, target) {
+            if (syncing) return;
+            syncing = true;
+
+            try {
+                target.currentTime = source.currentTime;
+            } finally {
+                syncing = false;
+            }
+        }
+
+        function handleRateChange(source, target) {
+            if (target.playbackRate !== source.playbackRate) {
+                target.playbackRate = source.playbackRate;
+            }
+        }
+
+        function bindSync(videoA, videoB) {
+            videoA.addEventListener("play", () => handlePlay(videoA, videoB));
+
+            videoA.addEventListener("pause", () => {
+                if (!videoA.ended) {
+                    handlePause(videoA, videoB);
+                }
+            });
+
+            videoA.addEventListener("seeking", () => handleSeek(videoA, videoB));
+            videoA.addEventListener("seeked", () => handleSeek(videoA, videoB));
+
+            videoA.addEventListener("ratechange", () => handleRateChange(videoA, videoB));
+
+            videoA.addEventListener("timeupdate", () => {
+                if (syncing) return;
+                syncTime(videoA, videoB, 0.12);
+            });
+
+            videoA.addEventListener("ended", () => {
+                if (!videoB.ended) {
+                    videoB.pause();
+                    videoB.currentTime = videoA.currentTime;
+                }
+            });
+        }
+
+        bindSync(leftVideo, rightVideo);
+        bindSync(rightVideo, leftVideo);
+
+        function initSync() {
+            if (leftVideo.readyState >= 1 && rightVideo.readyState >= 1) {
+                rightVideo.currentTime = leftVideo.currentTime;
+            }
+        }
+
+        leftVideo.addEventListener("loadedmetadata", initSync);
+        rightVideo.addEventListener("loadedmetadata", initSync);
+
+        setInterval(() => {
+            if (syncing) return;
+
+            const bothPlaying = !leftVideo.paused && !rightVideo.paused;
+            if (bothPlaying) {
+                const diff = Math.abs(leftVideo.currentTime - rightVideo.currentTime);
+                if (diff > 0.2) {
+                    syncing = true;
+                    rightVideo.currentTime = leftVideo.currentTime;
+                    syncing = false;
+                }
+            }
+        }, 500);
+    </script>
+
+
+
+
+
+    <script>
+        const leftVideo = document.getElementById("video-left");
+        const rightVideo = document.getElementById("video-right");
+
+        let isSyncing = false;
+
+        function syncCurrentTime(source, target, force = false) {
+            if (!source || !target) return;
+            const diff = Math.abs(source.currentTime - target.currentTime);
+
+            if (force || diff > 0.08) {
+                isSyncing = true;
+                try {
+                    target.currentTime = source.currentTime;
+                } catch (e) {}
+                isSyncing = false;
+            }
+        }
+
+        function syncPlay(source, target) {
+            if (isSyncing) return;
+            isSyncing = true;
+
+            syncCurrentTime(source, target, true);
+
+            const playPromise = target.play();
+            if (playPromise !== undefined) {
+                playPromise.catch(() => {});
+            }
+
+            isSyncing = false;
+        }
+
+        function syncPause(target) {
+            if (isSyncing) return;
+            isSyncing = true;
+            target.pause();
+            isSyncing = false;
+        }
+
+        function bindTwoWaySync(videoA, videoB) {
+            videoA.addEventListener("play", () => {
+                syncPlay(videoA, videoB);
+            });
+
+            videoA.addEventListener("pause", () => {
+                if (!videoB.paused) {
+                    syncPause(videoB);
+                }
+            });
+
+            videoA.addEventListener("seeking", () => {
+                syncCurrentTime(videoA, videoB, true);
+            });
+
+            videoA.addEventListener("seeked", () => {
+                syncCurrentTime(videoA, videoB, true);
+            });
+
+            videoA.addEventListener("timeupdate", () => {
+                if (isSyncing) return;
+                syncCurrentTime(videoA, videoB, false);
+            });
+
+            videoA.addEventListener("ratechange", () => {
+                if (videoB.playbackRate !== videoA.playbackRate) {
+                    videoB.playbackRate = videoA.playbackRate;
+                }
+            });
+
+            videoA.addEventListener("waiting", () => {
+                syncCurrentTime(videoA, videoB, true);
+            });
+
+            videoA.addEventListener("ended", () => {
+                if (!videoB.ended) {
+                    videoB.pause();
+                    syncCurrentTime(videoA, videoB, true);
+                }
+            });
+        }
+
+        bindTwoWaySync(leftVideo, rightVideo);
+        bindTwoWaySync(rightVideo, leftVideo);
+
+        // 两个视频元数据加载完成后，先对齐起始时间
+        function initSync() {
+            if (
+                leftVideo.readyState >= 1 &&
+                rightVideo.readyState >= 1
+            ) {
+                rightVideo.currentTime = leftVideo.currentTime;
+            }
+        }
+
+        leftVideo.addEventListener("loadedmetadata", initSync);
+        rightVideo.addEventListener("loadedmetadata", initSync);
+
+        // 周期性校正，避免长时间播放后逐渐漂移
+        setInterval(() => {
+            if (!leftVideo.paused && !rightVideo.paused && !isSyncing) {
+                const diff = Math.abs(leftVideo.currentTime - rightVideo.currentTime);
+                if (diff > 0.15) {
+                    syncCurrentTime(leftVideo, rightVideo, true);
+                }
+            }
+        }, 300);
+    </script>
+
+    <p style="margin-top: -30px; margin-bottom: -10px; text-align: center;">
+        Please refresh the page if the videos cannot be loaded.
+    </p>
+
+        <!--    <h4 style="margin: 2px 0 0 0; font-weight: 400; color: #5f6368; font-size: 1rem;">-->
+    <!--        Beyond Appearance: The First Large-Scale Deepfake Detection Benchmark for Activity Forensics-->
+    <!--    </h4>-->
+    <h3 class="section-title" style="text-align: center;">
+        Beyond Appearance: The First Benchmark for Activity-Level Forensics
+    </h3>
+    <figure style="margin: 20px 0; text-align: center;">
+        <!-- 上面两张 -->
+        <div style="display: flex; justify-content: center; align-items: flex-start; gap: 24px; margin-bottom: 2px;">
+            <img src="fig/01_motivation/1.png"
+                 alt="Activity-level forgery example"
+                 style="width: 330px; display: block; border-radius: 4px;">
+
+            <img src="fig/01_motivation/2.png"
+                 alt="Appearance-level forgery example"
+                 style="width: 330px; display: block; border-radius: 4px;">
+        </div>
+
+        <!-- 下面 table -->
+        <div style="display: flex; justify-content: center; margin-top: 25px;">
+            <img src="fig/01_motivation/table.png"
+                 alt="Dataset comparison table"
+                 style="width: 390px; display: block; border-radius: 4px;">
+        </div>
+
+        <!-- 共同标题
+        <figcaption style="font-size: 0.8rem; color: #5f6368; margin-top: 10px; line-height: 1.4; text-align: center;">
+            <strong>Figure 1.</strong>         Beyond Appearance: The First Benchmark for Activity-Level Forensics
+        </figcaption>
+        -->
+
+
+
+    <!-- 数据集构建流程 (Fig 2) -->
+    <h3 class="section-title" style="text-align: center;">
+        Grounding-Assisted Dataset Construction
+    </h3>
+<div class="figure-box" style="text-align: center;">
+    <img src="fig/03_generation/main.png"
+         style="width: 80%; height: auto;"
+         alt="Data Construction Pipeline">
+    <p class="caption" style="text-align: center; margin: 10px auto;">
+        Overview of grounding-assisted dataset generation pipeline.
+    </p>
+</div>
+
+    <h3 class="section-title" style="text-align: center;">
+        Dataset and Code
+    </h3>
+
+    <div class="links">
+        <a href="#">Paper</a>
+        <a href="https://github.com/activityforensics/activityforensics.github.io">Code</a>
+        <a href="#">Dataset</a>
+    </div>
+
+    <!-- BibTeX -->
+    <h3 class="section-title" style="text-align: center;">
+        Citation
+    </h3>
+
+    <div class="bibtex-box">
+    <pre><code>
+        @inproceedings{bao2026activityforensics,
+        title={ActivityForensics: A Comprehensive Benchmark for Localizing Manipulated Activity in Videos},
+        author={Bao, Peijun and Luo, Anwei and Pan, Gang and Kot, Alex C. and Jiang, Xudong},
+        booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+        year={2026}
+        }
+    </code></pre>
+    </div>
+
+<div style="text-align:center; margin-top:40px;">
+<!--  <h3>Visitors</h3>-->
+<a href='https://mapmyvisitors.com/web/1c3hm'  title='Visit tracker'><img src='https://mapmyvisitors.com/map.png?cl=ffffff&w=350&t=tt&d=-6R9uf1k09TTGITM7MERMquBbJJElHY2M01jI6-FX1w&co=2d78ad&ct=ffffff'/></a>
