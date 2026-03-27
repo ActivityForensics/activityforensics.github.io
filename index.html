@@ -1,129 +1,499 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ActivityForensics | 数字活动取证工具</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <style>
-    body { font-family: system-ui, -apple-system, sans-serif; }
-    .hero-bg { background: linear-gradient(135deg, #1e3a8a, #312e81); }
-    video { border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ActivityForensics: A Comprehensive Benchmark</title>
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Google Sans', sans-serif; margin: 0; padding: 0; color: #3c4043; line-height: 1.6; background: #fff; }
+        .container { max-width: 1050px; margin: 0 auto; padding: 60px 20px; }
+
+        /* Title Section */
+        header { text-align: center; margin-bottom: 50px; }
+        h1 { font-size: 2.4rem; color: #202124; margin-bottom: 12px; line-height: 1.2; }
+        h2 { font-size: 1.6rem; font-weight: 400; color: #5f6368; margin-top: 0; margin-bottom: 30px; }
+
+        .authors { font-size: 1.25rem; font-weight: 500; margin-bottom: 10px; color: #202124; }
+        .authors span { margin: 0 10px; }
+
+        /* Links Buttons */
+        .links { display: flex; justify-content: center; gap: 15px; margin: 35px 0; }
+        .links a {
+            text-decoration: none;
+            color: #fff;
+            background: #202124;
+            padding: 10px 25px;
+            border-radius: 30px;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        .links a:hover { background: #4a4a4a; transform: translateY(-2px); }
+
+        /* Figure Boxes */
+        .section-title { font-size: 1.8rem; margin: 60px 0 30px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
+        .figure-box { text-align: center; margin: 40px 0; }
+        .figure-box img { width: 100%; height: auto; border-radius: 4px; }
+        .caption { font-size: 0.95rem; color: #5f6368; margin-top: 15px; text-align: justify; line-height: 1.5; }
+
+        /* Interactive Video Comparison */
+        .video-comparison {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #f1f3f4;
+            padding: 40px 20px;
+            border-radius: 20px;
+            margin: 40px 0;
+        }
+        .video-item { width: 44%; text-align: center; }
+        .video-item video {
+            width: 100%;
+            border-radius: 12px;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            background: #000;
+        }
+        .video-label { font-weight: 700; margin-top: 15px; display: block; font-size: 1.1rem; }
+
+        .arrow-container { width: 10%; text-align: center; display: flex; flex-direction: column; align-items: center; }
+        .arrow-svg { width: 40px; height: 40px; fill: #bdc1c6; }
+        .timestamp-tag {
+            background: #ff3b30;
+            color: #fff;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-top: 10px;
+            white-space: nowrap;
+        }
+
+        /* BibTeX */
+        .bibtex-box { background: #f8f9fa; padding: 25px; border-radius: 12px; position: relative; }
+        pre { margin: 0; font-family: 'Courier New', Courier, monospace; font-size: 0.9rem; overflow-x: auto; white-space: pre-wrap; }
+
+        /* Footer & Map */
+        footer { margin-top: 80px; padding: 40px 0; border-top: 1px solid #eee; text-align: center; }
+        .map-widget { margin-top: 30px; filter: grayscale(0.5); }
+    </style>
 </head>
-<body class="bg-gray-950 text-white">
+<body>
 
-  <!-- Hero -->
-  <div class="hero-bg py-20 text-center">
-    <h1 class="text-6xl font-bold mb-4">ActivityForensics</h1>
-    <p class="text-2xl text-gray-300 max-w-3xl mx-auto">专业的数字活动取证与行为分析开源工具</p>
-    <div class="mt-10 flex justify-center gap-6 flex-wrap">
-      <a href="https://github.com/ActivityForensics/ActivityForensics" 
-         class="bg-white text-black px-8 py-4 rounded-2xl font-semibold flex items-center gap-3 hover:bg-gray-200">
-        <i class="fab fa-github text-2xl"></i> GitHub 代码仓库
-      </a>
-      <a href="#paper" class="border border-white px-8 py-4 rounded-2xl font-semibold hover:bg-white hover:text-black">
-        阅读论文
-      </a>
+<div class="container">
+    <!-- 标题与作者 -->
+    <header style="text-align: center; margin-bottom: 30px; line-height: 1.2;">
+        <h1 style="margin: 0 0 5px 0; font-size: 2rem; font-weight: 700; line-height: 1.2; text-align: center;">
+            ActivityForensics: A Comprehensive Benchmark <br>
+            for Localizing Manipulated Activity in Videos
+        </h1>
+        <h4 style="margin: 0 0 10px 0; color: #1a73e8; font-size: 1.1rem; letter-spacing: 0.5px;">The IEEE/CVF Conference on Computer Vision and Pattern Recognition 2026 (CVPR 2026)</h4>
+
+        <div class="authors" style="font-size: 1rem; font-weight: 500; margin: 0 0 2px 0;">
+            Peijun Bao<sup>1,2</sup>, &nbsp; Anwei Luo<sup>3</sup>, &nbsp; Gang Pan<sup>1</sup>, &nbsp; Alex C. Kot<sup>2</sup>, &nbsp; Xudong Jiang<sup>2</sup>
+        </div>
+
+        <div class="affiliations" style="font-size: 0.8rem; color: #5f6368; margin: 0;">
+            <sup>1</sup>Zhejiang University &nbsp;&nbsp; <sup>2</sup>Nanyang Technological University &nbsp;&nbsp; <sup>3</sup>Jiangxi University of Finance and Economics
+        </div>
+
+    </header>
+
+    <!--    <h4 style="margin: 2px 0 0 0; font-weight: 400; color: #5f6368; font-size: 1rem;">-->
+    <!--        Beyond Appearance: The First Large-Scale Deepfake Detection Benchmark for Activity Forensics-->
+    <!--    </h4>-->
+    <h3 class="section-title" style="text-align: center;">
+        Beyond Appearance: The First Benchmark for Activity-Level Forensics
+    </h3>
+    <figure style="margin: 20px 0; text-align: center;">
+        <!-- 上面两张 -->
+        <div style="display: flex; justify-content: center; align-items: flex-start; gap: 24px; margin-bottom: 2px;">
+            <img src="fig/01_motivation/1.png"
+                 alt="Activity-level forgery example"
+                 style="width: 300px; display: block; border-radius: 4px;">
+
+            <img src="fig/01_motivation/2.png"
+                 alt="Appearance-level forgery example"
+                 style="width: 300px; display: block; border-radius: 4px;">
+        </div>
+
+        <!-- 下面 table -->
+        <div style="display: flex; justify-content: center; margin-top: 25px;">
+            <img src="fig/01_motivation/table.png"
+                 alt="Dataset comparison table"
+                 style="width: 390px; display: block; border-radius: 4px;">
+        </div>
+
+        <!-- 共同标题
+        <figcaption style="font-size: 0.8rem; color: #5f6368; margin-top: 10px; line-height: 1.4; text-align: center;">
+            <strong>Figure 1.</strong>         Beyond Appearance: The First Benchmark for Activity-Level Forensics
+        </figcaption>
+        -->
+
+    </figure>
+
+
+
+    <h3 class="section-title" style="text-align: center;">
+        Example: Can you identify which video is manipulated by AI?
+    </h3>
+
+
+
+    <div
+            class="row-container"
+            style="
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 700px;
+        margin: 40px auto;
+    "
+    >
+        <div style="width: 250px; flex: 0 0 250px;">
+            <video
+                    id="video-left"
+                    style="width: 100%; object-fit: cover;"
+                    controls
+                    muted
+                    preload="auto"
+                    playsinline
+                    poster="./fig/02_samples/0UK3H_fast.jpg"
+            >
+                <source src="./fig/02_samples/0UK3H.mp4" type="video/mp4">
+            </video>
+        </div>
+
+<div style="width: 180px; flex: 0 0 180px;">
+    <button
+        id="btn"
+        onclick="showImg()"
+        style="
+            width:100%;
+            background-color: #b0c4de;
+            border: none;
+            padding: 8px;
+            cursor: pointer;
+        "
+    >
+        Clik to Show Answer
+    </button>
+
+    <img
+        id="answerImg"
+        src="./fig/02_samples/main.png"
+        style="width: 100%; object-fit: cover; display: none; margin-top: 8px;"
+    />
+</div>
+
+<script>
+function showImg() {
+    const img = document.getElementById("answerImg");
+    const btn = document.getElementById("btn");
+
+    img.style.display = "block";
+    btn.style.display = "none";
+
+    setTimeout(() => {
+        img.style.display = "none";
+        btn.style.display = "block";
+    }, 1500); // 10秒
+}
+</script>
+
+
+        <div style="width: 250px; flex: 0 0 250px;">
+            <video
+                    id="video-right"
+                    style="width: 100%; object-fit: cover;"
+                    controls
+                    muted
+                    preload="auto"
+                    playsinline
+                    poster="./fig/02_samples/0UK3H_fast.jpg"
+            >
+                <source src="./fig/02_samples/0UK3H+2.10=8.20=charades@test_delete@0UK3H@639@wan.mp4" type="video/mp4">
+            </video>
+        </div>
     </div>
-  </div>
 
-  <!-- 论文主图 -->
-  <div id="paper" class="max-w-6xl mx-auto px-6 py-16">
-    <h2 class="text-4xl font-bold text-center mb-10">论文主图 (Teaser Figure)</h2>
-    <div class="bg-gray-900 rounded-3xl p-8 text-center">
-      <!-- 请替换成你的论文主图实际链接 -->
-      <img src="https://raw.githubusercontent.com/ActivityForensics/ActivityForensics/main/images/teaser.jpg" 
-           alt="ActivityForensics Paper Main Figure" 
-           class="mx-auto rounded-2xl shadow-2xl max-w-full">
+    <script>
+        const leftVideo = document.getElementById("video-left");
+        const rightVideo = document.getElementById("video-right");
+
+        let syncing = false;
+
+        function syncTime(source, target, threshold = 0.08) {
+            const diff = Math.abs(source.currentTime - target.currentTime);
+            if (diff > threshold) {
+                target.currentTime = source.currentTime;
+            }
+        }
+
+        async function handlePlay(source, target) {
+            if (syncing) return;
+            syncing = true;
+
+            try {
+                syncTime(source, target, 0);
+
+                if (target.paused) {
+                    await target.play().catch(() => {});
+                }
+            } finally {
+                syncing = false;
+            }
+        }
+
+        function handlePause(source, target) {
+            if (syncing) return;
+            syncing = true;
+
+            try {
+                syncTime(source, target, 0);
+                if (!target.paused) {
+                    target.pause();
+                }
+            } finally {
+                syncing = false;
+            }
+        }
+
+        function handleSeek(source, target) {
+            if (syncing) return;
+            syncing = true;
+
+            try {
+                target.currentTime = source.currentTime;
+            } finally {
+                syncing = false;
+            }
+        }
+
+        function handleRateChange(source, target) {
+            if (target.playbackRate !== source.playbackRate) {
+                target.playbackRate = source.playbackRate;
+            }
+        }
+
+        function bindSync(videoA, videoB) {
+            videoA.addEventListener("play", () => handlePlay(videoA, videoB));
+
+            videoA.addEventListener("pause", () => {
+                if (!videoA.ended) {
+                    handlePause(videoA, videoB);
+                }
+            });
+
+            videoA.addEventListener("seeking", () => handleSeek(videoA, videoB));
+            videoA.addEventListener("seeked", () => handleSeek(videoA, videoB));
+
+            videoA.addEventListener("ratechange", () => handleRateChange(videoA, videoB));
+
+            videoA.addEventListener("timeupdate", () => {
+                if (syncing) return;
+                syncTime(videoA, videoB, 0.12);
+            });
+
+            videoA.addEventListener("ended", () => {
+                if (!videoB.ended) {
+                    videoB.pause();
+                    videoB.currentTime = videoA.currentTime;
+                }
+            });
+        }
+
+        bindSync(leftVideo, rightVideo);
+        bindSync(rightVideo, leftVideo);
+
+        function initSync() {
+            if (leftVideo.readyState >= 1 && rightVideo.readyState >= 1) {
+                rightVideo.currentTime = leftVideo.currentTime;
+            }
+        }
+
+        leftVideo.addEventListener("loadedmetadata", initSync);
+        rightVideo.addEventListener("loadedmetadata", initSync);
+
+        setInterval(() => {
+            if (syncing) return;
+
+            const bothPlaying = !leftVideo.paused && !rightVideo.paused;
+            if (bothPlaying) {
+                const diff = Math.abs(leftVideo.currentTime - rightVideo.currentTime);
+                if (diff > 0.2) {
+                    syncing = true;
+                    rightVideo.currentTime = leftVideo.currentTime;
+                    syncing = false;
+                }
+            }
+        }, 500);
+    </script>
+
+
+
+
+
+    <script>
+        const leftVideo = document.getElementById("video-left");
+        const rightVideo = document.getElementById("video-right");
+
+        let isSyncing = false;
+
+        function syncCurrentTime(source, target, force = false) {
+            if (!source || !target) return;
+            const diff = Math.abs(source.currentTime - target.currentTime);
+
+            if (force || diff > 0.08) {
+                isSyncing = true;
+                try {
+                    target.currentTime = source.currentTime;
+                } catch (e) {}
+                isSyncing = false;
+            }
+        }
+
+        function syncPlay(source, target) {
+            if (isSyncing) return;
+            isSyncing = true;
+
+            syncCurrentTime(source, target, true);
+
+            const playPromise = target.play();
+            if (playPromise !== undefined) {
+                playPromise.catch(() => {});
+            }
+
+            isSyncing = false;
+        }
+
+        function syncPause(target) {
+            if (isSyncing) return;
+            isSyncing = true;
+            target.pause();
+            isSyncing = false;
+        }
+
+        function bindTwoWaySync(videoA, videoB) {
+            videoA.addEventListener("play", () => {
+                syncPlay(videoA, videoB);
+            });
+
+            videoA.addEventListener("pause", () => {
+                if (!videoB.paused) {
+                    syncPause(videoB);
+                }
+            });
+
+            videoA.addEventListener("seeking", () => {
+                syncCurrentTime(videoA, videoB, true);
+            });
+
+            videoA.addEventListener("seeked", () => {
+                syncCurrentTime(videoA, videoB, true);
+            });
+
+            videoA.addEventListener("timeupdate", () => {
+                if (isSyncing) return;
+                syncCurrentTime(videoA, videoB, false);
+            });
+
+            videoA.addEventListener("ratechange", () => {
+                if (videoB.playbackRate !== videoA.playbackRate) {
+                    videoB.playbackRate = videoA.playbackRate;
+                }
+            });
+
+            videoA.addEventListener("waiting", () => {
+                syncCurrentTime(videoA, videoB, true);
+            });
+
+            videoA.addEventListener("ended", () => {
+                if (!videoB.ended) {
+                    videoB.pause();
+                    syncCurrentTime(videoA, videoB, true);
+                }
+            });
+        }
+
+        bindTwoWaySync(leftVideo, rightVideo);
+        bindTwoWaySync(rightVideo, leftVideo);
+
+        // 两个视频元数据加载完成后，先对齐起始时间
+        function initSync() {
+            if (
+                leftVideo.readyState >= 1 &&
+                rightVideo.readyState >= 1
+            ) {
+                rightVideo.currentTime = leftVideo.currentTime;
+            }
+        }
+
+        leftVideo.addEventListener("loadedmetadata", initSync);
+        rightVideo.addEventListener("loadedmetadata", initSync);
+
+        // 周期性校正，避免长时间播放后逐渐漂移
+        setInterval(() => {
+            if (!leftVideo.paused && !rightVideo.paused && !isSyncing) {
+                const diff = Math.abs(leftVideo.currentTime - rightVideo.currentTime);
+                if (diff > 0.15) {
+                    syncCurrentTime(leftVideo, rightVideo, true);
+                }
+            }
+        }, 300);
+    </script>
+
+<p style="margin-top: -30px; margin-bottom: -10px; text-align: center;">
+  If you cannot play the videos, please refresh the page.
+</p>
+
+    <!-- 数据集构建流程 (Fig 2) -->
+    <h3 class="section-title" style="text-align: center;">
+        Grounding-Assisted Dataset Construction
+    </h3>
+    <div class="figure-box">
+        <img src="fig/03_generation/main.png" style="width: 80%; height: auto; alt="Data Construction Pipeline">
+        <p class="caption">
+            <strong>Overview of grounding-assisted data generation pipeline.</strong>  1) We leverage video captioning and temporal grounding to obtain activity descriptions and localize their corresponding temporal segments. 2) Subsequently, grounded segments and manipulated descriptions are harnessed as conditioning signals to automatically perform activity manipulations. 3) The manipulated segments are finally seamlessly merged into the rest of the video, while remaining visually consistent across both tampered and authentic regions. The green bounding boxes indicate the original regions, while the red ones correspond to the manipulated regions.
+        </p>
     </div>
-  </div>
 
-  <!-- 论文与代码链接 -->
-  <div class="max-w-6xl mx-auto px-6 py-12 grid md:grid-cols-2 gap-10">
-    <div>
-      <h3 class="text-3xl font-semibold mb-6">📄 论文链接</h3>
-      <a href="https://你的论文链接" target="_blank"
-         class="block bg-gray-900 hover:bg-gray-800 p-8 rounded-3xl text-xl transition">
-        阅读完整论文
-      </a>
+
+    <!-- BibTeX -->
+    <h3 class="section-title" style="text-align: center;">
+        Citation
+    </h3>
+
+    <div class="bibtex-box">
+    <pre><code>@inproceedings{bao2026activityforensics,
+      title={ActivityForensics: A Comprehensive Benchmark for Localizing Manipulated Activity in Videos},
+      author={Bao, Peijun and Luo, Anwei and Pan, Gang and Kot, Alex C. and Jiang, Xudong},
+      booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+      year={2026}
+    }</code></pre>
     </div>
-    <div>
-      <h3 class="text-3xl font-semibold mb-6">💻 代码链接</h3>
-      <a href="https://github.com/ActivityForensics/ActivityForensics" target="_blank"
-         class="block bg-gray-900 hover:bg-gray-800 p-8 rounded-3xl text-xl transition">
-        查看开源代码仓库
-      </a>
+
+
+    <h3 class="section-title" style="text-align: center;">
+        Resources
+    </h3>
+
+    <div class="links">
+        <a href="#">Paper</a>
+        <a href="https://github.com/activityforensics/activityforensics.github.io">Code</a>
+        <a href="#">Dataset</a>
     </div>
-  </div>
 
-  <!-- 视频样例 - 直接播放 -->
-  <div class="max-w-6xl mx-auto px-6 py-16 bg-gray-900">
-    <h2 class="text-4xl font-bold text-center mb-12">视频演示 Samples</h2>
-    
-    <div class="grid md:grid-cols-2 gap-12">
-      <!-- 视频1 -->
-      <div>
-        <h3 class="text-xl font-medium mb-4 text-center">演示视频 1：核心功能展示</h3>
-        <video width="100%" controls autoplay loop muted playsinline>
-          <source src="https://raw.githubusercontent.com/ActivityForensics/ActivityForensics/main/videos/demo1.mp4" type="video/mp4">
-          您的浏览器不支持视频播放。
-        </video>
-      </div>
-
-      <!-- 视频2 -->
-      <div>
-        <h3 class="text-xl font-medium mb-4 text-center">演示视频 2：实际案例分析</h3>
-        <video width="100%" controls autoplay loop muted playsinline>
-          <source src="https://raw.githubusercontent.com/ActivityForensics/ActivityForensics/main/videos/demo2.mp4" type="video/mp4">
-          您的浏览器不支持视频播放。
-        </video>
-      </div>
-    </div>
-    
-    <p class="text-center text-gray-400 mt-8">视频文件请上传到仓库的 <code>videos/</code> 文件夹</p>
-  </div>
-
-  <!-- 作者信息 -->
-  <div class="max-w-6xl mx-auto px-6 py-16">
-    <h2 class="text-4xl font-bold text-center mb-10">作者 Authors</h2>
-    <div class="bg-gray-900 rounded-3xl p-10 text-center text-lg leading-relaxed">
-      Peijun Bao<sup>1,2</sup>, Anwei Luo<sup>3,4</sup>, Gang Pan<sup>1</sup>, Alex C. Kot<sup>5,6,2</sup>, Xudong Jiang<sup>2</sup><br><br>
-      <sup>1</sup>College of Computer Science and Technology, Zhejiang University<br>
-      <sup>2</sup>School of Electrical and Electronic Engineering, Nanyang Technological University<br>
-      <sup>3</sup>School of Computing and Artificial Intelligence, Jiangxi University of Finance and Economics<br>
-      <sup>4</sup>Jiangxi Provincial Key Laboratory of Multimedia Intelligent Processing<br>
-      <sup>5</sup>Faculty of Engineering, Shenzhen MSU-BIT University<br>
-      <sup>6</sup>VinUniversity<br><br>
-      <span class="font-mono text-blue-400">peijun001@e.ntu.edu.sg</span>
-    </div>
-  </div>
-
-  <!-- BibTeX -->
-  <div class="max-w-6xl mx-auto px-6 py-16 bg-gray-900">
-    <h2 class="text-4xl font-bold text-center mb-8">BibTeX Citation</h2>
-    <pre class="bg-gray-950 p-8 rounded-3xl overflow-auto text-sm text-gray-300"><code>@article{bao202X_activityforensics,
-  title     = {ActivityForensics: ...},
-  author    = {Peijun Bao and Anwei Luo and Gang Pan and Alex C. Kot and Xudong Jiang},
-  year      = {202X},
-  journal   = {...}
-}</code></pre>
-  </div>
-
-  <!-- 访问者统计（推荐使用 MapMyVisitors 或 Clustrmaps，更美观） -->
-  <div class="max-w-6xl mx-auto px-6 py-16 text-center">
-    <h2 class="text-3xl font-bold mb-8">访问统计 Visitor Statistics</h2>
-    <div class="bg-gray-900 inline-block px-12 py-8 rounded-3xl">
-      <p class="mb-6">全球访问者地图</p>
-      <!-- 推荐替换成 MapMyVisitors 或 Clustrmaps 的代码（更漂亮的互动地图） -->
-      <p class="text-gray-400">（建议注册 <a href="https://mapmyvisitors.com/" target="_blank" class="text-blue-400">MapMyVisitors</a> 获取免费互动世界地图）</p>
-    </div>
-  </div>
-
-  <footer class="text-center py-12 text-gray-500 border-t border-gray-800">
-    © 2026 ActivityForensics • 开源项目
-  </footer>
+    <!-- 访问统计与页脚 -->
+    <footer>
+        <p>© 2026 ActivityForensics Project Team</p>
+        <div class="map-widget">
+            <!-- 请在此处替换为你从 Clustrmaps 获取的脚本代码 -->
+            <script type="text/javascript" id="clustrmaps" src="//cdn.clustrmaps.com/map_v2.js?cl=ffffff&w=300&t=tt&d=YOUR_ACTUAL_KEY"></script>
+        </div>
+    </footer>
+</div>
 
 </body>
 </html>
