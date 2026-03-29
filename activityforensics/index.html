@@ -297,118 +297,6 @@
     </script>
 
 
-
-
-
-    <script>
-        const leftVideo = document.getElementById("video-left");
-        const rightVideo = document.getElementById("video-right");
-
-        let isSyncing = false;
-
-        function syncCurrentTime(source, target, force = false) {
-            if (!source || !target) return;
-            const diff = Math.abs(source.currentTime - target.currentTime);
-
-            if (force || diff > 0.08) {
-                isSyncing = true;
-                try {
-                    target.currentTime = source.currentTime;
-                } catch (e) {}
-                isSyncing = false;
-            }
-        }
-
-        function syncPlay(source, target) {
-            if (isSyncing) return;
-            isSyncing = true;
-
-            syncCurrentTime(source, target, true);
-
-            const playPromise = target.play();
-            if (playPromise !== undefined) {
-                playPromise.catch(() => {});
-            }
-
-            isSyncing = false;
-        }
-
-        function syncPause(target) {
-            if (isSyncing) return;
-            isSyncing = true;
-            target.pause();
-            isSyncing = false;
-        }
-
-        function bindTwoWaySync(videoA, videoB) {
-            videoA.addEventListener("play", () => {
-                syncPlay(videoA, videoB);
-            });
-
-            videoA.addEventListener("pause", () => {
-                if (!videoB.paused) {
-                    syncPause(videoB);
-                }
-            });
-
-            videoA.addEventListener("seeking", () => {
-                syncCurrentTime(videoA, videoB, true);
-            });
-
-            videoA.addEventListener("seeked", () => {
-                syncCurrentTime(videoA, videoB, true);
-            });
-
-            videoA.addEventListener("timeupdate", () => {
-                if (isSyncing) return;
-                syncCurrentTime(videoA, videoB, false);
-            });
-
-            videoA.addEventListener("ratechange", () => {
-                if (videoB.playbackRate !== videoA.playbackRate) {
-                    videoB.playbackRate = videoA.playbackRate;
-                }
-            });
-
-            videoA.addEventListener("waiting", () => {
-                syncCurrentTime(videoA, videoB, true);
-            });
-
-            videoA.addEventListener("ended", () => {
-                if (!videoB.ended) {
-                    videoB.pause();
-                    syncCurrentTime(videoA, videoB, true);
-                }
-            });
-        }
-
-        bindTwoWaySync(leftVideo, rightVideo);
-        bindTwoWaySync(rightVideo, leftVideo);
-
-        // 两个视频元数据加载完成后，先对齐起始时间
-        function initSync() {
-            if (
-                leftVideo.readyState >= 1 &&
-                rightVideo.readyState >= 1
-            ) {
-                rightVideo.currentTime = leftVideo.currentTime;
-            }
-        }
-
-        leftVideo.addEventListener("loadedmetadata", initSync);
-        rightVideo.addEventListener("loadedmetadata", initSync);
-
-        // 周期性校正，避免长时间播放后逐渐漂移
-        setInterval(() => {
-            if (!leftVideo.paused && !rightVideo.paused && !isSyncing) {
-                const diff = Math.abs(leftVideo.currentTime - rightVideo.currentTime);
-                if (diff > 0.15) {
-                    syncCurrentTime(leftVideo, rightVideo, true);
-                }
-            }
-        }, 300);
-    </script>
-
     <p style="margin-top: -30px; margin-bottom: -10px; text-align: center;">
         (Please refresh the page if the videos cannot be loaded.)
     </p>
@@ -488,5 +376,12 @@
 }
     </code></pre>
     </div>
+
+    <div style="text-align:center; margin-top:40px;">
+        <!--  <h3>Visitors</h3>-->
+        <a href='https://mapmyvisitors.com/web/1c3hm'  title='Visit tracker'><img src='https://mapmyvisitors.com/map.png?cl=ffffff&w=350&t=tt&d=-6R9uf1k09TTGITM7MERMquBbJJElHY2M01jI6-FX1w&co=2d78ad&ct=ffffff'/></a>
+    </div>
+
+</div>
 </body>
 </html>
